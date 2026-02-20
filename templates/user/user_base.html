@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block user_base %}
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-12">
+                {% block personal %} {% endblock %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block page_js %}
+<script>
+    $(document).ready(function () {
+        const datePicker = MCDatepicker.create({
+            el: '#mc_date_picker',
+            bodyType: 'modal',
+            customClearBTN: '清除',
+            customCancelBTN: '取消',
+            customOkBTN: '确认',
+            selectedDate: new Date(),
+            dateFormat: 'yyyy-mm-dd',
+            customWeekDays: ['周日', '周一', '周二', '周三', '周四', '周五', '周六'],
+            customMonths: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
+        });
+        $('.select2-example').select2({
+            language: "zh-CN"
+        });
+    });
+</script>
+{% endblock %}

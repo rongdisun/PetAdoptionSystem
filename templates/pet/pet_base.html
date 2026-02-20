@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block user_base %}
+
+    {% block pet_index %} {% endblock %}
+    {% block pet_detail_section %} {% endblock %}
+    {% block my_pet %} {% endblock %}
+    {% block all_pet %} {% endblock %}
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-12">
+                {% block pet_section %} {% endblock %}
+            </div>
+        </div>
+    </div>
+    
+{% endblock %}

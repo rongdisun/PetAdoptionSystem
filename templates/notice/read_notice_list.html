@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block notice_base %}
+    <div class="container mt-5 mb-5">
+        <div class="row">
+            <main class="col-md-12">
+
+                <!-- 通知列表 -->
+                {% if notices %}
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>消息列表</th>
+                            <th>消息内容</th>
+                            <th>消息备注</th>
+                            <th>发送时间</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        {% for notice in notices %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>
+                                    <a href="{% url 'pet:pet_detail' notice.target.id %}" target="_blank">
+                                        <span style="color: #5897fb;">
+                                            {{ notice.actor }}
+                                        </span>
+                                        {{ notice.verb }}。
+                                    </a>
+                                </td>
+                                <td>{{ notice.description|default:"无审核备注" }}</td>
+                                <td>{{ notice.timestamp }}</td>
+                            </tr>
+                        {% endfor %}
+
+                        </tbody>
+                    </table>
+                {% else %}
+                    <div class="alert alert-success">
+                        暂无通知消息
+                    </div>
+                {% endif %}
+
+            </main>
+        </div>
+
+    </div>
+
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends 'forum/forum_base.html' %}
+{% block index_page_head %}
+    <div class="container-fluid">
+        <div class="row mt-0 d-flex justify-content-center" style="background-image: url('/static/img/main-bg.jpg')">
+            <div class="col-7 mt-5">
+                <h2 class="text-center mb-4">搜索你感兴趣的话题</h2>
+                <form class="input-group mb-5" action="{% url 'post:search' %}" method="get">
+                    <input type="text" class="form-control" name="search" placeholder="请输入...">
+                    <button class="btn btn-primary" type="submit">
+                        <i class="bi-search"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block content %}
+    <div class="row mt-5">
+        <div class="col-9">
+            {% for object in object_list %}
+                <div class="row mb-1">
+                    <div class="col-12">
+                        <a class="h5 text-decoration-none" href="{% url 'post:detail' object.pk %}">
+                            {{ object.title }}
+                        </a>
+                        <p>{{ object.content|truncatechars:200 }}</p>
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <i class="fa fa-clock-o" aria-hidden="true"></i> {{ object.add_time }} |
+                                <i class="fa fa-eye" aria-hidden="true"></i> {{ object.views }} |
+                                <i class="fa fa-thumbs-up" aria-hidden="true"></i> {{ object.thumb_up }} |
+                                <i class="fa fa-thumbs-down" aria-hidden="true"></i>{{ object.thumb_down }} |
+                            </div>
+                            <div>
+                                作者：
+                                <a href="{% url 'post:author_detail' %}?author={{ object.author.pk }}" class="text-decoration-none" type="button">
+                                    {{ object.author }}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+            {% endfor %}
+        </div>
+        <div class="col-3">
+            {% include 'forum/sidebar_card.html' %}
+        </div>
+    </div>
+
+
+{% endblock %}

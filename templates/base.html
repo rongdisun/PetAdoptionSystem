@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {% include 'components/css_file.html' %}
+
+    <style>
+        .asteriskField {
+            display: none;
+        }
+
+        a {
+            color: #6984c2;
+            text-decoration: none;
+            background-color: transparent;
+        }
+
+        a:hover {
+            color: #405d9e;
+            text-decoration: none;
+        }
+    </style>
+    {% block page_style %} {% endblock %}
+</head>
+<body>
+
+<div style="min-height: 100vh; display: flex; flex-direction: column">
+    <div style="flex-grow: 1;">
+        {% include 'components/navbar.html' %}
+
+        {% block article_base %}
+        {% endblock %}
+
+        {% block mes_base %}
+        {% endblock %}
+
+        {% block forum_base %}
+        {% endblock %}
+
+        {% block mall %}
+        {% endblock %}
+
+        {% block user_base %}
+        {% endblock %}
+
+        {% block pet_base %}
+        {% endblock %}
+
+        {% block notice_base %}
+        {% endblock %}
+
+
+    </div>
+    {% include 'components/footer.html' %}
+</div>
+
+
+{% include 'components/js_file.html' %}
+{% block page_js %} {% endblock %}
+<script>
+    $(document).ready(function () {
+        const datePicker = MCDatepicker.create({
+            el: '#mc_date_picker',
+            bodyType: 'modal',
+            customClearBTN: '清除',
+            customCancelBTN: '取消',
+            customOkBTN: '确认',
+            selectedDate: new Date(),
+            dateFormat: 'yyyy-mm-dd',
+            customWeekDays: ['周日', '周一', '周二', '周三', '周四', '周五', '周六'],
+            customMonths: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
+        });
+        $('.select2-example').select2({
+            language: "zh-CN"
+        });
+
+        AOS.init({duration: 800, once: true});
+
+        lightGallery(document.getElementById('lightgallery'), {
+            plugins: [lgZoom, lgThumbnail],
+            speed: 500,
+            selector: 'div',
+            subHtmlSelectorRelative: true
+        });
+
+        $('.select2-input').select2({
+            placeholder: '请选择...',
+            allowClear: true,
+            language: 'zh-CN',
+            theme: 'bootstrap-5'             // 如使用 Bootstrap 主题
+
+        });
+    });
+</script>
+</body>
+</html>

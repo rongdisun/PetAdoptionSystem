@@ -1,0 +1,144 @@
+{% extends 'pet/pet_base.html' %}
+
+{% block page_style %}
+    <style>
+        .section-title {
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+    </style>
+
+{% endblock %}
+
+
+{% block pet_index %}
+
+    <!-- 轮播图 -->
+    <div id="home" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            {% for carousel in carousels %}
+                <div class="carousel-item {% if forloop.first %} active{% endif %}">
+                    <img src="{{ carousel.pet_carousel_thumbnail.url }}" class="d-block w-100" >
+                    <div class="carousel-caption d-none d-md-block">
+                        <h1 class="display-4 fw-bold">{{ carousel.title }}</h1>
+                        <p>{{ carousel.description }}</p>
+                    </div>
+                </div>
+            {% empty %}
+
+            {% endfor %}
+
+
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#home" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#home" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
+    </div>
+
+    <!-- 宠物展示 -->
+    <section id="pets" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title">待领养宠物</h2>
+            <div class="row g-4">
+                {% for recent_pet in recent_pets %}
+                    <div class="col-md-4" data-aos="zoom-in">
+                        <div class="card pet-card">
+                            <img src="{{ recent_pet.goods_image_thumbnail.url }}" class="card-img-top" alt="小猫">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ recent_pet.name }}</h5>
+                                <p class="card-text">{{ recent_pet.description }}</p>
+                                <a href="{% url 'pet:pet_detail' recent_pet.pk %}" class="btn btn-primary btn-sm">申请领养</a>
+                            </div>
+                        </div>
+                    </div>
+                {% empty %}
+
+                {% endfor %}
+
+
+
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 领养流程 -->
+    <section id="process" class="py-5">
+        <div class="container">
+            <h2 class="section-title">领养流程</h2>
+            <div class="row text-center">
+                <div class="col-md-3" data-aos="fade-up">
+                    <i class="bi bi-search fs-1 text-primary"></i>
+                    <h5 class="mt-2">浏览宠物</h5>
+                    <p>查看所有待领养的宠物信息。</p>
+                </div>
+                <div class="col-md-3" data-aos="fade-up" data-aos-delay="100">
+                    <i class="bi bi-pencil-square fs-1 text-primary"></i>
+                    <h5 class="mt-2">提交申请</h5>
+                    <p>填写领养申请表单，提交审核。</p>
+                </div>
+                <div class="col-md-3" data-aos="fade-up" data-aos-delay="200">
+                    <i class="bi bi-chat-dots fs-1 text-primary"></i>
+                    <h5 class="mt-2">线上面试</h5>
+                    <p>与工作人员沟通宠物情况。</p>
+                </div>
+                <div class="col-md-3" data-aos="fade-up" data-aos-delay="300">
+                    <i class="bi bi-house-heart fs-1 text-primary"></i>
+                    <h5 class="mt-2">成功领养</h5>
+                    <p>签署协议，带宠物回家。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 关于我们 -->
+    <section id="about" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title">关于我们</h2>
+            <p class="text-center" data-aos="fade-up">
+                我们是一个致力于流浪动物救助与领养的平台，通过线上平台将爱心人士与需要帮助的动物连接起来。
+                我们相信，每一个生命都值得被尊重与珍惜。
+            </p>
+        </div>
+    </section>
+
+    {% comment %}<!-- 用户评价 -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="section-title">用户评价</h2>
+            <div class="row g-4">
+                <div class="col-md-4" data-aos="flip-left">
+                    <div class="card shadow">
+                        <div class="card-body">
+                            <p>“我从这里领养了一只小猫，现在是我的家庭成员，感谢平台的用心！”</p>
+                            <h6 class="text-end">— 小王</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="flip-left" data-aos-delay="100">
+                    <div class="card shadow">
+                        <div class="card-body">
+                            <p>“领养流程清晰，工作人员也很专业，非常好的体验。”</p>
+                            <h6 class="text-end">— 小李</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="flip-left" data-aos-delay="200">
+                    <div class="card shadow">
+                        <div class="card-body">
+                            <p>“平台上的宠物信息很详细，我找到了最适合我的狗狗。”</p>
+                            <h6 class="text-end">— 小张</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>{% endcomment %}
+
+
+{% endblock %}
+
